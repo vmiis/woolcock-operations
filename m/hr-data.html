@@ -1,0 +1,31 @@
+<section>
+    VmInclude:__COMPONENT__/g/grid.01.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__COMPONENT__/g/grid.01.js
+        //-------------------------------------
+        var fields="_Submit,Title,First_Name,Surname,Gender,Date_of_Birth,Email,Home_Phone,Mobile_Phone";
+        m.fields="_Form,"+fields+",Submit_date,Submitted_by,_Delete";
+        //-------------------------------------
+        m.cell_render=function(records,I,field,td){
+            switch(field){
+                case '_Submit':
+                    var h="<u style='cursor:pointer;padding:0 3px'>Submit to HR System</u>";
+                    td.html(h);
+                    td.find('u').on('click',function(){
+                        var c=confirm("Are you sure to submit?");
+                        if(c==true){
+                            $vm.alert("The form has been submitted to the Dynamic HR System (not implemented).")
+                        }
+                    })
+                    break;
+            }
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>
