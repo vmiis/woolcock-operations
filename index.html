@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name="description" content="">
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" />
+    </head>
+    <body>
+        <!----------------------------------------------->
+        <div id=layout>
+            <div id=header></div>
+            <div id=content></div>
+            <div id=footer></div>
+            <div id=system></div>
+            <script>$vm={};</script>
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
+            <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.1.1/js/msal.js"></script>
+            <script src="microsoft.js"></script>
+            </div>
+        <!----------------------------------------------->
+        <script>
+            //------------------------------------
+            $vm.ver=[0.03,0.01];
+            $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
+            if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost') $vm.localhost=true;
+            //------------------------------------
+            //modules used immediately
+            $vm.module_list={
+                //you can add modules here directly
+                "home":	        {url:"$H/0/home.html",router:1},
+                "operations":	{url:"$H/m/operations.html"},
+                "frame":	    {url:"$H/0/frame.html"},
+                "app":	        {url:"$H/0/app.html"},
+                "header":	    {url:"$H/0/header.html"},
+                "footer":	    {url:"$H/0/footer.html"},
+            };
+            for(p in $vm.module_list) $vm.module_list[p].url=$vm.module_list[p].url.replace('$H',$vm.hosting_path);
+            //------------------------------------
+            //called by framework
+            $vm.start=function(){
+                $vm.load_component('header',$vm.root_layout_header,{});
+                $vm.load_component('footer',$vm.root_layout_footer,{});
+                $vm.load_component('app',$vm.root_layout_system,{});
+            }
+            //------------------------------------
+
+
+
+
+            
+            //------------------------------------
+            //Do not need to chang the following code in most cases
+            //The following code will load a framework module and on demand module list
+            //------------------------------------
+            $VmAPI={};$vm.start_time=new Date().getTime();
+            //------------------------------------
+            $vm.root_layout_header='header';
+            $vm.root_layout_content_slot='content'
+            $vm.root_layout_footer='footer';
+            $vm.root_layout_system='system';
+            //---------------------------------------------
+            $vm._id=1;
+            //---------------------------------------------
+            var apppath=window.location.href.substring(0, window.location.href.lastIndexOf('/')).split('\/?')[0];
+            console.log("start point  "+(new Date().getTime()-$vm.start_time)+'ms');
+            //---------------------------------------------
+            var urlA=$vm.hosting_path+"/0/frame.html";
+            var ver=localStorage.getItem(apppath+urlA+"ver");
+            var txt=localStorage.getItem(apppath+urlA+"txt");
+            if(ver!=$vm.ver[0] || txt==null || $vm.localhost==true){
+                $.get(urlA+'?_='+new Date().getTime(),function(new_txt){
+                    localStorage.setItem(apppath+urlA+"txt",new_txt);
+                    localStorage.setItem(apppath+urlA+"ver",$vm.ver[0]);
+                    console.log('loading from url, done at '+(new Date().getTime()-$vm.start_time)+'ms. '+urlA );
+                    $('#system').append(new_txt.replace(/__ID/g,'_1'));
+                    $vm._start();
+                },'text');
+            }
+            else{
+                console.log('loading from storage. done at '+(new Date().getTime()-$vm.start_time)+'ms. '+urlA+' '+ver+'/'+$vm.ver[0]);
+                $('#system').append(txt.replace(/__ID/g,'_1'));
+                $vm._start();
+            }
+            //---------------------------------------------
+        </script>
+    </body>
+</html>
+

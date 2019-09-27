@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.1.1/js/msal.js"></script>
+    </head>
+    <body>
+        <script>
+            console.log("microsoft authentication in a hidden iframe for vmiis A");
+            new Msal.UserAgentApplication(
+                {
+                    auth: {
+                        clientId: 'f39f8959-8cd7-4570-8c0f-548306bf899a', 
+                    },
+                    cache: {
+                        cacheLocation: "localStorage",
+                        storeAuthStateInCookie: true
+                    },
+                }
+            );
+        </script>
+    </body>
+</html>

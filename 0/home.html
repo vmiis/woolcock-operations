@@ -1,0 +1,88 @@
+<div id=D__ID>
+	<div id=page__ID class=home_page_1>
+		<div class="container-fluid" style='max-width:960px'>
+			<div class="text-center panel__ID" style='color: #1f3254;'>
+				<br>
+				<p class=>Welcome to Woolcock Operations</p>
+				<h2>Woolcock named World's Best in Field</h2>
+				<br>
+			</div>
+			<br><br>
+			<br><br>
+			<br><br>
+		</div>
+		<div style='text-align: center;color:#fff;position:absolute;bottom:10px;font-size:150%;width:100%;'>
+			<div id=scroll_down__ID style='display:inline-block;padding:10px 20px;cursor:pointer'>
+				<i class="fas fa-angle-double-down"></i>
+				<br>Scroll
+			</div>
+		</div>
+	</div>
+	<div id=page2__ID class=home_page_1 style='background-color: #fff;'>
+		<div id=component1__ID></div>
+	</div>
+	<script>
+		$vm.load_component('operations','component1__ID',{})
+		//$('#get_in__ID').on('click',function(){
+		//	$vm.load_module('operations','',{})
+		//})
+		$('#scroll_down__ID').on('click',function(e){
+			e.preventDefault();
+    		$('html, body').animate({ scrollTop: $('#page2__ID').offset().top-100}, 800, 'linear');
+		})
+	</script>
+	<style>
+		#D__ID{
+			height:100%;
+	        overflow:auto;
+			animation: vm_module_fadein 1.0s, D__ID 3s;
+	        padding-bottom:10%;
+		}
+		#page__ID{
+			height:100%;
+			display: flex;
+			align-items: center;
+		}
+		.panel__ID{
+			color:#fff;
+			background: rgba(0, 0, 0, 0.0);
+			border-radius: 25px;
+			padding:10px 30px;
+		}
+		#page__ID h1{
+			text-shadow: 2px 2px 2px #000;
+		}
+		@keyframes D__ID {
+			from {padding-top: 300px;}
+			to {padding-top: 0px;}
+		}
+	    @media screen and (max-width: 992px) {
+	        #D__ID{
+	            animation: vm_module_fadein 1.0s;
+	        }
+	    }
+		#scroll_down__ID {
+			color:#fff;
+			animation:scroll__ID 8s;
+			-moz-animation:scroll__ID 8s infinite; /* Firefox */
+			-webkit-animation:scroll__ID 8s infinite; /* Safari and Chrome */
+		}
+    	@keyframes scroll__ID 
+		{
+			0%   {color:#fff;}
+			50%  {color:#333;}
+			100%   {color:#fff;}
+		}
+        @media screen and (max-width: 1200px) {
+			#page__ID h1{
+				font-size: 26px;
+			}
+		}
+
+	</style>
+	<script>
+		function F__ID(){
+			$vm['home_ready']=1;
+		}
+	</script>
+</div>
