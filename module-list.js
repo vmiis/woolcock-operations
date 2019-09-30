@@ -6,6 +6,8 @@
         "me":   	    {url:"$H/m/me.html"},
         "my-groups":   	{url:"$H/m/my-groups.html"},
         "users":   	    {url:"$H/m/users.html"},
+        "forms":   	    {url:"$H/m/forms.html"},
+        "admin":   	    {url:"$H/m/admin.html"},
     }
     for(p in modules){
         $vm.module_list[p]=modules[p]; 

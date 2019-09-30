@@ -1,0 +1,291 @@
+<div id=D__ID>
+    <div class=h_img__ID>
+        <div class=h_txt__ID><h4>Forms</h4></div>
+    </div>
+    <div id=panel__ID class=panel__ID>
+            <div class='nav__ID'>
+                <span>Forms</span>
+                <ul>
+                    <li><a href=?/m2>New Hire</a></li>
+                    <!--
+                    <li><a href=?/contract-variation-data>Contract Variation</a></li>
+                    <li><a href=?/contract-renewal-data>Contract Renewal</a></li>
+                    -->
+                </ul>
+            </div>
+            <!--
+            <div class='nav__ID'>
+                <span>Student Appointment</span>
+                
+                <ul>
+                    <li><a href=?/new-student-agreement-data>New Student Agreement</a></li>
+                    <li><a href=?/student-agreement-renewal-data>Student Agreement Renewal</a></li>
+                    <li><a href=?/variation-to-existing-student-agreement-data>Variation to Existing Student Agreement</a></li>
+                </ul>
+            </div>
+            <div class='nav__ID'>
+                <span>Clinician Appointment</span>
+                
+                <ul>
+                    <li><a href=?/new-clinician-hire-data>New Clinician Hire</a></li>
+                    <li><a href=?/variation-to-existing-clinician-data>Variation to Existing Clinician</a></li>
+                </ul>
+            </div>
+            <div class='nav__ID'>
+                <span>Affiliate Appointment</span>
+                
+                <ul>
+                    <li><a href=?/new-affiliate-data>New Affiliate</a></li>
+                    <li><a href=?/new-honorary-affiliate-data>New Honorary Affiliate</a></li>
+                </ul>
+            </div>
+            <div class='nav__ID'>
+                <span>Staff</span>
+                
+                <ul>
+                    <li><a href=?/me>Me</a></li>
+                    <li><a href=?/my-groups>My groups</a></li>
+                    <li><a href=?/users>Contact Information</a></li>
+                    <li><a href=?/incident-report-data>Incident Report</a></li>
+                    <li><a href=?/employee-appointment-c-data>Employee Appointment (old)</a></li>
+                    <li><a href=?/clinician-appointment-data>Clinician Appointment (old)</a></li>
+                </ul>
+            </div>
+
+            <div _class='nav__ID'>
+                <span>Research Volunteers</span>
+                <ul>
+                    <li><a href=?/project-data>Projects</a></li>
+                    <li><a href=?/study-data>Studies</a></li>
+                    <li><a href=?/student-data>Students</a></li>
+                    <li><a href=?/contact-data>Contacts</a></li>
+                    <li><a href=?/volunteer-study-history-data>Volunteer Study History</a></li>
+                    <li><a href=?/volunteer-audit-data>Volunteer Audit</a></li>
+                    
+                    <li><a href=?/create-list-fields>Create List Fields</a></li>
+                </ul>
+            </div>
+            <div class='nav__ID'>
+                <span>Woolcock 365 resources</span>
+                <ul>
+                    <li><a href=?/groups>Groups</a></li>
+                    <li><a href=?/sharepoint-site>Organization Sites</a></li>
+                    <li><a href=?/documents>Documents</a></li>
+                    <li><a href=?/entity-data>Dynamics Entities</a></li>
+                </ul>
+            </div>
+            <div class='nav__ID'>
+                <span>Woolcock Development Templates</span>
+                <ul>
+                    <li><a href=?/template-01-data>Web Form <i class="fas fa-arrows-alt-h"></i> Dynamics Entity </a></li>
+                    <li><a app href=https://forms.office.com/Pages/ResponsePage.aspx?id=fKuOHmxcSEe37jG_-RpjUV5BH-EXAQdPnQUervzMiBNUMFk0NTVTR1Y1U0JFNjlHWDdaUUlNNzJYSS4u>Microsoft Form <i class="fas fa-arrow-right"></i> Dynamics Entity </a></li>
+                    
+                    <li><a href=?/template-02-data>Web Form <i class="fas fa-arrows-alt-h"></i> Sharepoint List </a></li>
+                    <li><a app href=https://forms.office.com/Pages/ResponsePage.aspx?id=fKuOHmxcSEe37jG_-RpjUV5BH-EXAQdPnQUervzMiBNUMk1RU01RSzBIS1VNMDRCMjlYOVc5T1ZGSC4u>Microsoft Form <i class="fas fa-arrow-right"></i> SharePoint List </a></li>
+
+                    <li><a href=?/template-03-data>Web Page <i class="fas fa-arrow-left"></i> Excel Sheet</a></li>
+                </ul>
+            </div>
+        -->
+
+    </div>
+    <script>
+        function F__ID(){
+            //--------------------------------------------------------
+            $vm.module_list["__MODULE__"].show=function(){
+                document.title="Panel | "+$vm.default_title;
+                $("meta[name='description']").attr("content","Control Panel");
+            }
+            //--------------------------------------------------------
+            //var this_module=$vm.module_list[$vm.vm['__ID'].name];
+            //--------------------------------------------------------
+            $('#panel__ID a').on('click',function(e){
+                e.preventDefault();
+                var href=$(this).attr('href');
+                var app=$(this).attr('app');
+                var dev=$(this).attr('dev');
+                if(app!=undefined){
+                    window.open(href);
+                    return;
+                }
+                if(dev!=undefined){
+                    $vm.alert("Under development");
+                    return;
+                }
+                if(href!=undefined){
+                    href=href.replace('?\/','');
+                    href=href.replace(/\//g,'_');
+                    if(app==undefined) $vm.load_module(href,'',{});
+                    else if($vm.module_list[href]!=undefined) window.open($vm.module_list[href].url);
+                    else alert("The '"+ href +"' is not defined in the module list");
+                }
+            })
+            //--------------------------------------------------------
+            $('#panel__ID a').each(function(){
+                var href=$(this).attr('href');
+                if(href!=undefined){
+                    href=href.replace('?\/','');
+                    href=href.replace(/\//g,'_');
+                    if($vm.module_list[href]!=undefined){
+                        var url=$vm.module_list[href].url;
+                        $(this).attr('title',url);
+                    }
+                }
+            })
+            //--------------------------------------------------------
+        }
+    </script>
+    <style>
+        #D__ID{
+            background-color:#fff;
+            height:100%;
+            overflow: auto;
+            animation: vm_module_fadein 1.0s;
+        }
+        #panel__ID{
+            margin:0 auto;
+            max-width:1400px;
+    		padding:10px 0 0 20px;
+            font-size:14px;
+    	}
+        .panel__ID{
+            padding:0px 50px 10px 50px;
+            font-size:14px;
+    		max-width: 100%;
+    		column-count: 4;
+    		column-width: 300px;
+    		column-gap: 30px;
+            font-size:14px;
+        }
+	    .panel__ID a{
+		    /*margin:3px 10px;*/
+            /*white-space: nowrap;*/
+	    }
+	    .panel__ID span{
+
+            color:#283f55;
+			font-weight: bold;
+			margin:3px 10px;
+            font-size: 18px;
+            
+            display: inline-block;
+            border-bottom: 1px solid #f9e09b;
+            padding-bottom: 2px;
+            white-space: nowrap;
+
+	    }
+
+        .panel__ID li{
+            /*text-decoration: none;*/
+        }
+        a {
+            text-decoration: none;
+        }
+        a:link {
+            color:#555;
+        }
+        a:visited {
+            color:#555;
+        }
+        a:hover {
+            color:red;
+        }
+        a:active {
+            color:#555;
+        }
+        #keywords__ID::placeholder {
+            color: #ccc;
+            padding-left:6px;
+        }        
+        @media screen and (max-width:768px){
+            .panel__ID{
+                padding:20px;
+            }
+        }
+        .nav__ID{
+            display:inline-block;
+        }
+
+        /*
+    	@media screen and (max-width:768px){
+    		#toolbar__ID{
+    			padding: 3px 10px;
+    		}
+    		#toolbar__ID div{
+    			padding-left:3px;
+    		}
+    	}
+        #D__ID{
+    		background-color:#fff;
+    		height:100%;
+    		overflow: auto;
+    		animation: vm_module_fadein 1.0s;
+    	}
+        #panel__ID{
+            margin:0 auto;
+            max-width:1400px;
+    		padding:10px 0 0 20px;
+            font-size:14px;
+    	}
+    	#panel__ID a {
+    		text-decoration: none;
+    	}
+    	#panel__ID a:link {
+    		color:#555;
+    	}
+    	#panel__ID a:visited {
+    		color:#555;
+    	}
+    	#panel__ID a:hover {
+    		color:red;
+    	}
+    	#panel__ID a:active {
+    		color:#555;
+    	}
+        .nav__ID{
+	        padding:6px 26px 6px 6px;
+	        float:left;
+	    }
+	    .nav__ID span{
+			color:#283f55;
+			font-weight: bold;
+			margin:3px 10px;
+            font-size: 18px;
+            
+            display: inline-block;
+            border-bottom: 1px solid #f9e09b;
+            padding-bottom: 2px;
+            white-space: nowrap;
+	    }
+    	@media screen and (max-width:768px){
+    		#panel__ID{
+    			padding:10px 0 0 10px;
+    		}
+    	}
+        */
+
+
+        .h_img__ID{
+            margin:0 auto;
+            max-width:1400px;
+            
+            height:200px;
+            background-size: cover; background-position: center center; 
+            background-image: url(__CURRENT_PATH__/HRlanding.jpg);
+            padding-top:60px;
+            margin-top:50px;
+            margin-bottom:50px;
+            border-radius: 5px;
+        }
+        .h_txt__ID{
+            color:#fff;
+            background-color: rgba(50,90,90,0.5) !important;
+            _width: 35%;
+            display:inline-block;
+            margin: 0% 0% 0% 6%!important;
+            padding:20px;
+            border-radius: 10px;
+			text-shadow: 2px 2px 2px #000;
+        }
+    </style>
+</div>
