@@ -16,13 +16,13 @@
             <div id=system></div>
             <script>$vm={};</script>
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
-            <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.1.1/js/msal.js"></script>
+            <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.1.2/js/msal.min.js"></script>
             <script src="microsoft.js"></script>
             </div>
         <!----------------------------------------------->
         <script>
             //------------------------------------
-            $vm.ver=[0.03,0.01];
+            $vm.ver=[0.11,0.10];
             $vm.hosting_path=window.location.href.substring(0, window.location.href.split('?')[0].lastIndexOf('/'));
             if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost') $vm.localhost=true;
             //------------------------------------
@@ -45,8 +45,6 @@
                 $vm.load_component('app',$vm.root_layout_system,{});
             }
             //------------------------------------
-
-
 
 
             
@@ -84,7 +82,13 @@
                 $vm._start();
             }
             //---------------------------------------------
+            $("body").addClass('body_background_default');
         </script>
+        <style>
+            html,body{ margin:0; padding:0; height:100%; font-family:Arial;}
+            body{background-size: cover; background-repeat: repeat-x; background-position: center top; background-attachment: fixed;}
+            .body_background_default{ background-image: url(https://images.unsplash.com/photo-1515165252480-5f43c73756f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);}
+        </style>
     </body>
 </html>
 

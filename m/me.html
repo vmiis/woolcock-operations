@@ -1,0 +1,46 @@
+<div id=D__ID>
+    <button id=json__ID type=button class="btn btn-secondary" style='margin:15px 0 0 15px'>JSON data</button>
+    <div id=info__ID>
+	</div>
+	<script>
+		function F__ID(){
+            var D="";
+            //------------------------------------
+			$('#D__ID').on('load',function(){
+				$vm.m365_graph("https://graph.microsoft.com/v1.0/me/",{scopes: ["user.read"]},function(data){
+                    D=data;
+					$('#info__ID').html('');
+					var txt="<table>";
+						txt+="<tr><td>Display Name</td><td><b>"+data.displayName+"</b></td></tr>";
+						txt+="<tr><td>Given Name</td><td><b>"+data.givenName+"</b></td></tr>";
+						txt+="<tr><td>Surname</td><td><b>"+data.surname+"</b></td></tr>";
+						txt+="<tr><td>Email</td><td><b>"+data.mail+"</b></td></tr>";
+					txt+="</table>"
+					$('#info__ID').html(txt);
+				})
+			})
+            //------------------------------------
+            $('#json__ID').on('click',function(){
+                $vm.show_json_data(D);
+            })
+            //------------------------------------
+        }
+        
+	</script>
+	<style>
+		#D__ID{
+			height:100%;
+			animation: vm_module_fadein 1.0s;
+			background-color: #fff;
+		}
+        #info__ID{
+            padding:30px;
+        }
+        #info__ID span{
+            font-weight: bold;
+        }
+		#D__ID td{
+			padding-right:20px;
+		}
+	</style>
+</div>

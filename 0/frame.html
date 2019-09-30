@@ -46,7 +46,7 @@
             		$('#vm_signout').addClass('vm-hide');
             	}
             	else{
-                    var nm=$vm.user_name; if($vm.user_displayname!=undefined) nm=$vm.user_displayname;
+                    var nm=$vm.user_name; if($vm.displayname!=undefined) nm=$vm.displayname;
                     $('#vm_username').text('Signed in as '+ nm+third);
                     $('#vm_signin').addClass('vm-hide');
             		$('#vm_signout').removeClass('vm-hide');

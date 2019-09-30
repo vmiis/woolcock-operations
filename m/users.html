@@ -1,0 +1,124 @@
+<div id=D__ID>
+    <!--<button id=json__ID type=button class="btn btn-secondary" style='margin:15px 0 0 15px'>JSON data</button>-->
+	
+    <div style='padding:10px 20px 0 20px;'>
+        <form class="form-inline">
+            <input id=keywords__ID class=form-control style='width:230px' placeholder="filter">
+            <!--<button id=apply__ID type=button class="btn btn-secondary" title='Load'>Apply</button>-->
+        </form>
+        <hr>
+    </div>
+	<div id=table__ID>
+        <table id=grid__ID></table>
+    </div>
+	<script>
+		function F__ID(){
+            //------------------------------------
+			var nl="https://graph.microsoft.com/v1.0/users";
+			var Mn=0;
+			$vm.user_list__ID=[];
+			//var D="";
+            //------------------------------------
+			$('#D__ID').on('load',function(){
+				if($vm.user_list__ID.length==0){
+					$('#keywords__ID').val('');
+					get_users(nl);
+				}
+				else{
+
+				}
+			})
+            //------------------------------------
+			var get_user_end=function(){
+				var word=$('#keywords__ID').val();
+				//alert("End "+Mn);
+				//console.log($vm.user_list__ID);
+				$('#info__ID').html('');
+				var txt="";
+				txt+="<tr><th></th><th>First Name</th><th>Last name</th><th>Job Title</th><th>Email</th><th>Phone</th><th>Location</th></tr>";
+				var I=0;
+				for(i in $vm.user_list__ID){
+					I++;
+					var tr="";
+					tr+="<tr>";
+					tr+="<td>"+I+"</td>";
+					tr+="<td>"+$vm.user_list__ID[i].givenName+"</td>";
+					tr+="<td>"+$vm.user_list__ID[i].surname+"</td>";
+					tr+="<td>"+$vm.user_list__ID[i].jobTitle+"</td>";
+					tr+="<td>"+$vm.user_list__ID[i].mail+"</td>";
+					tr+="<td>"+$vm.user_list__ID[i].businessPhones[0]+"</td>";
+					tr+="<td>"+$vm.user_list__ID[i].officeLocation+"</td>";
+					tr+="</tr>";
+					if(word=="" || tr.toUpperCase().indexOf(word.toUpperCase())!==-1) txt+=tr;
+					else I--;
+				}
+				txt+=""
+				$('#grid__ID').html(txt.replace(/null/g,'').replace(/undefined/g,''));
+			}
+            //------------------------------------
+			var get_users=function(nl){
+				Mn++;
+				if(nl!=undefined && Mn<10){
+					$vm.m365_graph(nl,{scopes: ["user.read"]},function(data){
+						for(i in data.value){
+							$vm.user_list__ID.push(data.value[i])
+						}
+						nl=data["@odata.nextLink"];
+						get_users(nl);
+					})
+				}
+				else get_user_end();
+			}
+            //------------------------------------
+            $('#json__ID').on('click',function(){
+                $vm.show_json_data($vm.user_list__ID);
+            })
+			//------------------------------------
+			$('#keywords__ID').on('keyup',function(){
+				get_user_end();
+			})
+			//------------------------------------
+		}
+					
+		
+				/*
+				$vm.m365_graph("https://graph.microsoft.com/v1.0/users",function(data){
+					D=data;
+					$('#info__ID').html('');
+					var txt="<table>";
+					txt+="<tr><th>Display name</th><th>Mail</th></tr>";
+					for(i in data.value){
+						txt+="<tr><td>"+data.value[i].displayName+"</td><td> "+data.value[i].mail+"</td></tr>";
+					}
+					txt+="</table>"
+					$('#info__ID').html(txt);
+				})
+				*/
+				/*
+					var nl=data["@odata.nextLink"];
+					alert(nl)
+					$vm.m365_graph(nl,function(data1){
+						console.log(data1)
+					});
+					*/
+	</script>
+	<style>
+        VmInclude:__COMPONENT__/g/grid.01.css
+		#D__ID{
+			height:100%;
+			animation: vm_module_fadein 1.0s;
+			background-color: #fff;
+		}
+        #info__ID{
+            padding:30px;
+        }
+        #info__ID span{
+            font-weight: bold;
+		}
+		/*
+		#D__ID td{
+			padding-right:20px;
+		}
+		*/
+	</style>
+</div>

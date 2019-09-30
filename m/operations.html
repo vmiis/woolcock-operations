@@ -1,11 +1,10 @@
 <div id=D__ID>
     <div class=h_img__ID>
-        <div class=h_txt__ID><h4>Information</h4></div>
+        <div class=h_txt__ID><h4>Operations</h4></div>
     </div>
     <div id=panel__ID class=panel__ID>
             <div class='nav__ID'>
                 <span>Employee Appointment</span>
-                
                 <ul>
                     <li><a href=?/m2>New Hire</a></li>
                     <!--
@@ -14,6 +13,15 @@
                     -->
                 </ul>
             </div>
+            <div class='nav__ID'>
+                <span>Staff</span>
+                <ul>
+                    <li><a href=?/me>Me</a></li>
+                    <li><a href=?/my-groups>My groups</a></li>
+                    <li><a href=?/users>Contact Information</a></li>
+                </ul>
+            </div>
+
             <!--
             <div class='nav__ID'>
                 <span>Student Appointment</span>
@@ -92,14 +100,13 @@
     </div>
     <script>
         function F__ID(){
-            /*
             //--------------------------------------------------------
             $vm.module_list["__MODULE__"].show=function(){
                 document.title="Panel | "+$vm.default_title;
                 $("meta[name='description']").attr("content","Control Panel");
             }
             //--------------------------------------------------------
-            var this_module=$vm.module_list[$vm.vm['__ID'].name];
+            //var this_module=$vm.module_list[$vm.vm['__ID'].name];
             //--------------------------------------------------------
             $('#panel__ID a').on('click',function(e){
                 e.preventDefault();
@@ -123,8 +130,6 @@
                 }
             })
             //--------------------------------------------------------
-            */
-            /*
             $('#panel__ID a').each(function(){
                 var href=$(this).attr('href');
                 if(href!=undefined){
@@ -136,7 +141,6 @@
                     }
                 }
             })
-            */
             //--------------------------------------------------------
         }
     </script>
