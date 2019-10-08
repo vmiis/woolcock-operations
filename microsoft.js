@@ -4,12 +4,16 @@ $vm.m365_init=function(){
     if(p!="") h=h+":"+p;
     if(h.indexOf('projects.vmiis.com')!=-1) h=h+"/sites";
     $vm.m365_scope={
-        scopes: ["user.read","directory.read.all"]
+        //scopes: ["user.read","directory.read.all"]
+        scopes: ["user.read"]
     };
     $vm.msalConfig={
         auth: {
-            clientId: 'f39f8959-8cd7-4570-8c0f-548306bf899a', 
-            redirectUri:h+"/microsoft/vmiis.html",
+            authority:"https://login.microsoftonline.com/common/",
+            //clientId: 'f39f8959-8cd7-4570-8c0f-548306bf899a', 
+            //redirectUri:h+"/microsoft/vmiis.html",
+            clientId: '3bcb40c5-fec0-4b3b-ba67-f4d46d577f97', 
+            redirectUri:h+"/microsoft/woolcock.html",
         },
         cache: {
             cacheLocation: "localStorage",
@@ -23,7 +27,6 @@ $vm.m365_init=function(){
                 $vm.microsoft_token=tokenResponse.idToken.rawIdToken;
                 $vm.user_name_3rd=$vm.m365_msal.getAccount().name;
                 $vm.issuer_3rd="microsoft";
-                $vm.user_name_365=$vm.m365_msal.getAccount().userName;
                 if($vm.app_after_3rd_signin!=undefined) $vm.app_after_3rd_signin();
             }).catch(function (error){
                 console.log("S:"+error);
@@ -66,6 +69,10 @@ $vm.m365_init=function(){
             $vm.alert("You haven't signed in, or your previous session has expired.")
         });
     };
+    //------------------------------------
+    if(window.location.href.indexOf("signout=1")!=-1){
+        $vm.m365_signout();
+    }
     //------------------------------------
 }
 $vm.m365_init();

@@ -8,7 +8,7 @@
         if(window.location.toString().indexOf('_s=1')!=-1) $vm.api_address="http://localhost:8001";
         if(window.location.toString().indexOf('_s=5')!=-1) $vm.api_address="http://localhost:8005";
         //------------------------------------
-        $vm.default_title="Modular distributed web application";
+        $vm.default_title="Woolcock Institute of Medical Research";
         //------------------------------------
         var ready1=function(){
             var set_layout=function(){
@@ -51,8 +51,6 @@
             //------------------------------------
             window.onresize=function(){set_layout();}
             //------------------------------------
-            //$vm.init();
-            //$vm.init_status=1;
             $vm.init(function(){
                 $vm.init_status=1;
                 $vm.show_user();
@@ -71,24 +69,18 @@
                             $vm.groups=t.groups;
                         }
                     })
-                    $vm.m365_graph("https://graph.microsoft.com/v1.0/me/memberOf",{scopes: ["user.read","directory.read.all"]},function(data){
-                        //console.log(data)
-                        $vm.groups_data=data;
-                    })
+                    var a=$vm.m365_scope.scopes.indexOf("directory.read.all")
+                    if(a!=-1){
+                        $vm.m365_graph("https://graph.microsoft.com/v1.0/me/memberOf",{scopes: ["user.read","directory.read.all"]},function(data){
+                            $vm.groups_data=data;
+                        })
+                    }
                 }
             }
             //------------------------------------
             $vm.app_after_3rd_signin=function(){
-                //$vm.user_name=$vm.user_name_3rd;
-                //$vm.show_user();
                 $vm.exchange_microsoft_token();
             }
-            //------------------------------------
-            /*
-            if($vm.user_name!=$vm.user_name_3rd && $vm.user_name_3rd!=undefined){
-                $vm.app_after_3rd_signin();
-            }
-            */
             //------------------------------------
             if($vm.first_module!=undefined) $vm.show($vm.first_module);
             //------------------------------------
